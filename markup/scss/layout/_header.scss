@@ -1,0 +1,219 @@
+#header {
+	background-color: #23262f;
+	padding: 18px 0;
+	font-family: $second-font-sans-serif;
+
+	.container {
+		@extend %clearfix;
+
+		.logo {
+			display: block;
+
+			@include media ('>=tablet') {
+				display: inline-block;
+				padding: 5px 0;
+			}
+
+			a {
+				display: block;
+
+				img {
+					width: 200px;
+					height: 30px;
+
+					@include media ('>=desktop') {
+						width: 250px;
+					}
+				}
+			}
+		}	
+	}
+}
+
+.nav-opener {
+	display: block;
+	position: absolute;
+	top: 30px;
+	right: 20px;
+	z-index: 4;
+	width: 34px;
+	height: 19px;
+	padding: 8px 0;
+	color: $white;
+	background-color: currentColor;
+	background-clip: content-box;
+	transition: background-color $animation-speed;
+
+	@include media ('>=tablet') {
+		display: none;
+	}
+
+	&:before {
+		content: "";
+		top: 0;
+		position: absolute;
+		left: 0;
+		right: 0;
+		height: 3px;
+		background-color: currentColor;
+		transition: transform $animation-speed ease, top .25s ease $animation-speed;
+	}
+
+	&:after {
+		content: "";
+		top: 16px;
+		position: absolute;
+		left: 0;
+		right: 0;
+		height: 3px;
+		background-color: currentColor;
+		transition: transform $animation-speed ease, top .25s ease $animation-speed;
+	}
+
+	.nav-active & {
+		background-color: transparent;
+
+		&:before {
+			top: 10px;
+			transform: rotateZ(45deg) scale(1.05);
+			transition: top .25s, transform $animation-speed ease $animation-speed;
+		}
+
+		&:after {
+			top: 10px;
+			transform: rotateZ(-45deg) scale(1.05);
+			transition: top .25s, transform $animation-speed ease $animation-speed;
+		}
+	}
+}
+
+.nav-drop {
+	display: none;
+
+	@include media ('>=tablet') {
+		display: inline-block;
+		text-align: left;
+		float: right;
+		line-height: 13px;
+	}
+
+	.nav {
+		@extend %listreset;
+
+		text-align: center;
+		color: $base-link-color;
+
+		a:hover {
+			color: $light-green;
+		}
+
+		li {
+			@include media ('>=tablet') {
+				display: inline-block;
+				margin-left: 3px;
+				line-height: 12px;
+				font-size: 10px;
+
+				&:nth-child(5) {
+					border-right: 1px solid $white;
+					padding-right: 12px;
+				}
+			}
+
+			@include media ('>=desktop') {
+				margin-left: 25px;
+			}
+		}		
+
+		.log-menu {
+			@extend %listreset;
+			
+			@include media ('>=tablet') {
+				display: inline-block;
+			}
+
+			&.logged {
+
+				.enter,
+				.reg {
+					display: none;
+				}
+
+				.user {
+					display: inline-block;
+				}
+			}
+
+			li {
+				margin: 0 0 0 5px;
+
+				@include media ('>=desktop') {
+					margin: 0 0 0 14px;
+				}
+			}
+
+			.enter {
+
+				a {
+					display: inline-block;
+					margin-right: 8px;
+				}
+			}
+
+			.reg {
+				a {
+					display: inline-block;
+					border: 1px solid $light-blue;
+					padding: 15px 13px;
+					color: $light-blue;
+					border-radius: 4px;
+					font-weight: 500;
+
+					&:hover {
+						color: #272d3f;
+						background-color: $light-blue;
+					}
+				}
+			}
+
+			.user {
+				display: none;
+				padding-left: 36px;
+				font-weight: 500;
+
+				a {
+					color: $light-blue;
+					position: relative;
+
+					&:before {
+						position: absolute;
+						top: 2px;
+						right: -22px;
+					}
+
+					&:after {
+						content: "";
+						position: absolute;
+						width: 32px;
+						height: 32px;
+						top: -8px;
+						left: -44px;
+						background: url(../images/user.png) no-repeat;
+					}
+				}
+			}
+		}
+	}
+
+	.nav-active & {
+		display: block;
+
+		.nav {
+			padding: 20px 0 0 0;
+
+			li {
+				margin: 0 0 16px;
+			}
+		}
+	}
+}
